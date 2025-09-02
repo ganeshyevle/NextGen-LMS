@@ -16,10 +16,10 @@ const CourseList = () => {
       const tempCourses = allCourses.slice()
       input
         ? setFilteredCourses(
-            tempCourses.filter(item =>
-              item.courseTitle.toLowerCase().includes(input.toLowerCase())
-            )
+          tempCourses.filter(item =>
+            item.courseTitle.toLowerCase().includes(input.toLowerCase())
           )
+        )
         : setFilteredCourses(tempCourses)
     }
   }, [allCourses, input])
@@ -37,7 +37,7 @@ const CourseList = () => {
                 onClick={() => navigate('/')}
               >
                 Home
-               </span> / <span>Course List</span>
+              </span> / <span>Course List</span>
             </p>
           </div>
           <SearchBar data={input} />
@@ -59,10 +59,11 @@ const CourseList = () => {
         {/* Course results or fallback */}
         {filteredCourses.length > 0 ? (
           <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 my-16 gap-3 px-2 md:p-0'>
-            {filteredCourses.map((course, index) => (
-              <CourseCard key={index} course={course} />
+            {filteredCourses.map(course => (
+              <CourseCard key={course.id} course={course} />
             ))}
           </div>
+
         ) : (
           <p className='mt-16 text-gray-500 text-center text-lg'>
             ❌ No courses found for "<span className="font-semibold text-red-500">{input}</span>"

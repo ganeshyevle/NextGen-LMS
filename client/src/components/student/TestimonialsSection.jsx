@@ -10,27 +10,39 @@ const TestimonialsSection = () => {
         platform has made a difference in their lives.
       </p>
 
-        <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-6 md:gap-8 mt-8 sm:mt-10 md:mt-12 lg:mt-16 max-w-4xl w-full'>
-
-          {dummyTestimonial.map((testimonial, index) => (
-            <div key={index} className='text-sm text-left border border-gray-500/30 pb-6 rounded-lg bg-white shadow-[0px_4px_15px_0px] shadow-black/5 overflow-hidden'>
-            <div className='flex items-center gap-4 px-5 py-4 bg-gray-500/10'> 
-              <img className='h-12 w-12 rounded-full' src={testimonial.image} alt={testimonial.name} />
+      <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-6 md:gap-8 mt-8 sm:mt-10 md:mt-12 lg:mt-16 max-w-4xl w-full'>
+        {dummyTestimonial.map((testimonial, index) => (
+          <div
+            key={testimonial.id || index} // Use unique id if available, fallback to index
+            className='text-sm text-left border border-gray-500/30 pb-6 rounded-lg bg-white shadow-[0px_4px_15px_0px] shadow-black/5 overflow-hidden'
+          >
+            <div className='flex items-center gap-4 px-5 py-4 bg-gray-500/10'>
+              <img
+                className='h-12 w-12 rounded-full'
+                src={testimonial.image}
+                alt={testimonial.name}
+              />
               <div>
                 <h1 className='text-lg font-medium text-gray-800'>{testimonial.name}</h1>
                 <p className='text-gray-800/80'>{testimonial.role}</p>
               </div>
-             
             </div>
+
             <div className='p-5 pb-7'>
-                <div className='flex gap-0.5'>
-                  {[...Array(5)].map((_, i) => (
-                    <img className='h-5' key={index} src={i < Math.floor(testimonial.rating) ? assets.star : assets.star_blank} alt="" />
-                  ))}
-                </div>
-                <p className='text-gray-500 mt-5'>{testimonial.feedback}</p>
+              <div className='flex gap-0.5'>
+                {[...Array(5)].map((_, i) => (
+                  <img
+                    className='h-5'
+                    key={`${index}-${i}`} // Unique key for each star
+                    src={i < Math.floor(testimonial.rating) ? assets.star : assets.star_blank}
+                    alt=""
+                  />
+                ))}
               </div>
-              <a href="#" className='text-blue-500 underline px-5'>Read more</a>
+              <p className='text-gray-500 mt-5'>{testimonial.feedback}</p>
+            </div>
+
+            <a href="#" className='text-blue-500 underline px-5'>Read more</a>
           </div>
         ))}
       </div>

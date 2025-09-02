@@ -33,4 +33,4 @@ placeholder-gray-500 outline-none w-64 h-9 rounded px-2 text-sm' />
   )
 }
 
-export default Footer
+export default Footer;
